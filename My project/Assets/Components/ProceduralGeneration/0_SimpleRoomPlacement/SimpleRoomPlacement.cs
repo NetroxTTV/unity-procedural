@@ -46,6 +46,7 @@ namespace Components.ProceduralGeneration.SimpleRoomPlacement
                     storage.Add(room);
                 }
 
+
                 await UniTask.Delay(GridGenerator.StepDelay, cancellationToken: cancellationToken);
             }
 
@@ -67,6 +68,12 @@ namespace Components.ProceduralGeneration.SimpleRoomPlacement
                 }
             }
         }
+
+        private void PlaceLines(List<RectInt> storage)
+        {
+
+        }
+
 
         private void BuildGround()
         {
