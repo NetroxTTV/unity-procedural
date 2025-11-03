@@ -1,0 +1,51 @@
+# ====== Unity generated ======
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+MemoryCaptures/
+
+# Autres fichiers générés par Unity
+UserSettings/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Cache des packages Unity
+Packages/packages-lock.json
+
+# Fichiers de cache de l’éditeur
+*.DS_Store
+*.apk
+*.aab
+*.unitypackage
+
+# Fichiers de build spécifiques à la plateforme
+#*.exe
+*.app
+*.xcodeproj
+*.xcworkspace
+*.xcuserstate
+*.plist
+
+# Crash reports et logs
+crashlytics-build.properties
+*.stacktrace
+
+# ====== OS generated files ===
+
+.vs
