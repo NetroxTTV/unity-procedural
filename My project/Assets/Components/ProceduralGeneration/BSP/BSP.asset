@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063068a42d36a2b4ab6c5af3f3a5df1c, type: 3}
   m_Name: BSP
   m_EditorClassIdentifier: 
-  _maxSteps: 1000
+  _maxSteps: 10
+  maxIterations: 4
+  minRoomSize: 4
+  roomPadding: 2
