@@ -13,10 +13,14 @@ public class BSP : ProceduralGenerationMethod
     [SerializeField] private int minRoomSize = 4;
     [SerializeField] private int roomPadding = 2;
 
+    private System.Random _random;
+
     protected override async UniTask ApplyGeneration(CancellationToken cancellationToken)
     {
+        _random = RandomService.Random;
+
         RectInt allGrid = new RectInt(0, 0, Grid.Width, Grid.Lenght);
-        var root = new TestBSP(Grid, allGrid, maxIterations, minRoomSize);
+        var root = new TestBSP(Grid, allGrid, maxIterations, minRoomSize, _random);
         root.DivideGrid();
 
         PlaceRoomsInLeaves(root);
@@ -89,12 +93,12 @@ public class BSP : ProceduralGenerationMethod
         if (node.GetChild2() != null)
             CreateCorridors(node.GetChild2());
 
-        ConnectRooms(node.GetChild1().GetCenter(), node.GetChild2().GetBounds().GetCenter());
+        ConnectRooms(node.GetChild1().GetRoomCenter(), node.GetChild2().GetRoomCenter());
     }
 
     private void ConnectRooms(Vector2Int room1Center, Vector2Int room2Center)
     {
-        if (Random.value > 0.5f)
+        if (_random.NextDouble() > 0.5)
         {
             CreateHorizontalCorridor(room1Center.x, room2Center.x, room1Center.y);
             CreateVerticalCorridor(room1Center.y, room2Center.y, room2Center.x);
@@ -106,25 +110,6 @@ public class BSP : ProceduralGenerationMethod
         }
     }
 
-    private void CreateDogLegCorridor(Vector2Int start, Vector2Int end)
-    {
-        bool horizontalFirst = RandomService.Chance(0.5f);
-
-        if (horizontalFirst)
-        {
-            // Draw horizontal line first, then vertical
-            CreateHorizontalCorridor(start.x, end.x, start.y);
-            CreateVerticalCorridor(start.y, end.y, end.x);
-        }
-        else
-        {
-            // Draw vertical line first, then horizontal
-            CreateVerticalCorridor(start.y, end.y, start.x);
-            CreateHorizontalCorridor(start.x, end.x, end.y);
-        }
-    }
-
-    /// Creates a horizontal corridor from x1 to x2 at the given y coordinate
     private void CreateHorizontalCorridor(int x1, int x2, int y)
     {
         int xMin = Mathf.Min(x1, x2);
@@ -139,7 +124,6 @@ public class BSP : ProceduralGenerationMethod
         }
     }
 
-    /// Creates a vertical corridor from y1 to y2 at the given x coordinate
     private void CreateVerticalCorridor(int y1, int y2, int x)
     {
         int yMin = Mathf.Min(y1, y2);
@@ -153,7 +137,6 @@ public class BSP : ProceduralGenerationMethod
             AddTileToCell(cell, CORRIDOR_TILE_NAME, true);
         }
     }
-
 }
 
 public class TestBSP
@@ -165,9 +148,11 @@ public class TestBSP
     private int _currentIteration;
     private int _maxIterations;
     private int _minRoomSize;
+    private System.Random _random;
 
-    public TestBSP(VTools.Grid.Grid grid, RectInt bounds, int maxIterations, int minRoomSize, int currentIteration = 0)
+    public TestBSP(VTools.Grid.Grid grid, RectInt bounds, int maxIterations, int minRoomSize, System.Random random, int currentIteration = 0)
     {
+        _random = random;
         _grid = grid;
         _bounds = bounds;
         _maxIterations = maxIterations;
@@ -177,11 +162,11 @@ public class TestBSP
 
     public void CreateRoom(int padding)
     {
-        int roomWidth = Random.Range(_minRoomSize, _bounds.width - padding * 2 + 1);
-        int roomHeight = Random.Range(_minRoomSize, _bounds.height - padding * 2 + 1);
+        int roomWidth = Mathf.Max(_minRoomSize, _bounds.width - padding * 2);
+        int roomHeight = Mathf.Max(_minRoomSize, _bounds.height - padding * 2);
 
-        int roomX = Random.Range(_bounds.xMin + padding, _bounds.xMax - roomWidth - padding + 1);
-        int roomY = Random.Range(_bounds.yMin + padding, _bounds.yMax - roomHeight - padding + 1);
+        int roomX = _bounds.xMin + (_bounds.width - roomWidth) / 2;
+        int roomY = _bounds.yMin + (_bounds.height - roomHeight) / 2;
 
         _room = new RectInt(roomX, roomY, roomWidth, roomHeight);
     }
@@ -211,7 +196,7 @@ public class TestBSP
 
     private void CreateChilds()
     {
-        bool splitHorizontally = Random.value > 0.5f;
+        bool splitHorizontally;
 
         if (_bounds.width > _bounds.height)
         {
@@ -221,16 +206,21 @@ public class TestBSP
         {
             splitHorizontally = true;
         }
+        else
+        {
+            splitHorizontally = _random.NextDouble() > 0.5;
+        }
 
         if (splitHorizontally)
         {
-            int splitY = Random.Range(_bounds.yMin + _minRoomSize, _bounds.yMax - _minRoomSize);
+            int splitY = _random.Next(_bounds.yMin + _minRoomSize, _bounds.yMax - _minRoomSize);
 
             _child1 = new TestBSP(
                 _grid,
                 new RectInt(_bounds.x, _bounds.y, _bounds.width, splitY - _bounds.y),
                 _maxIterations,
                 _minRoomSize,
+                _random,
                 _currentIteration + 1
             );
 
@@ -239,18 +229,20 @@ public class TestBSP
                 new RectInt(_bounds.x, splitY, _bounds.width, _bounds.yMax - splitY),
                 _maxIterations,
                 _minRoomSize,
+                _random,
                 _currentIteration + 1
             );
         }
         else
         {
-            int splitX = Random.Range(_bounds.xMin + _minRoomSize, _bounds.xMax - _minRoomSize);
+            int splitX = _random.Next(_bounds.xMin + _minRoomSize, _bounds.xMax - _minRoomSize);
 
             _child1 = new TestBSP(
                 _grid,
                 new RectInt(_bounds.x, _bounds.y, splitX - _bounds.x, _bounds.height),
                 _maxIterations,
                 _minRoomSize,
+                _random,
                 _currentIteration + 1
             );
 
@@ -259,6 +251,7 @@ public class TestBSP
                 new RectInt(splitX, _bounds.y, _bounds.xMax - splitX, _bounds.height),
                 _maxIterations,
                 _minRoomSize,
+                _random,
                 _currentIteration + 1
             );
         }
@@ -270,5 +263,19 @@ public class TestBSP
     public TestBSP GetChild2() { return _child2; }
     public RectInt GetBounds() { return _bounds; }
     public RectInt GetRoom() { return _room; }
-    public Vector2Int GetCenter() { return new Vector2Int(_bounds.x / 2 , _bounds.y / 2 ); }
+    public Vector2Int GetCenter() { return new Vector2Int((_bounds.xMin + _bounds.width) / 2, (_bounds.yMin + _bounds.height) / 2); }
+    public Vector2Int GetRoomCenter()
+    {
+        if (IsLeaf())
+        {
+            return new Vector2Int(_room.xMin + _room.width / 2, _room.yMin + _room.height / 2);
+        }
+
+        if (_child1 != null)
+            return _child1.GetRoomCenter();
+        if (_child2 != null)
+            return _child2.GetRoomCenter();
+
+        return GetCenter();
+    }
 }

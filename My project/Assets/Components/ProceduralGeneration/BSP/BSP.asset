@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BSP
   m_EditorClassIdentifier: 
   _maxSteps: 10
-  maxIterations: 4
+  maxIterations: 5
   minRoomSize: 4
-  roomPadding: 2
+  roomPadding: 5
