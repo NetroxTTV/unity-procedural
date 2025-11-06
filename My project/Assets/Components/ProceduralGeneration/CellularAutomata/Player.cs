@@ -22,4 +22,6 @@ public class Player : MonoBehaviour
             transform.position += _moveDirection * Time.deltaTime * 20f;
         }
     }
+
+    public void DeletePlayer() { Destroy(gameObject); }
 }
