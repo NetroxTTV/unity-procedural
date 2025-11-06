@@ -1,5 +1,6 @@
 using Components.ProceduralGeneration;
 using Cysharp.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 using VTools.Grid;
@@ -14,7 +15,6 @@ public class BSP : ProceduralGenerationMethod
     [SerializeField] private int roomPadding = 2;
 
     private System.Random _random;
-
     protected override async UniTask ApplyGeneration(CancellationToken cancellationToken)
     {
         _random = RandomService.Random;
@@ -136,6 +136,11 @@ public class BSP : ProceduralGenerationMethod
 
             AddTileToCell(cell, CORRIDOR_TILE_NAME, true);
         }
+    }
+
+    private void SpawnPlayer()
+    {
+
     }
 }
 

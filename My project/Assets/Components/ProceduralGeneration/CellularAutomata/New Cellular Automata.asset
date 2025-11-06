@@ -15,3 +15,5 @@ MonoBehaviour:
   _maxSteps: 10
   maxIterations: 10
   noise_density: 50
+  mountainThreshold: 6
+  playerPrefab: {fileID: 2009863204050124520, guid: ab9f206ea3467544b8344305dcdf59b1, type: 3}
