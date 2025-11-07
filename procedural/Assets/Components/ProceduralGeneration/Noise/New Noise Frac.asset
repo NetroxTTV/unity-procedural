@@ -21,7 +21,7 @@ MonoBehaviour:
   Octaves: 1
   Lacunarity: 1.47
   Persistance: 0.406
-  Water_Height: -0.32
+  Water_Height: -0.41
   Sand_Height: 0.02
   Grass_Height: 0.6
   Rock_Height: 0.87
