@@ -163,4 +163,4 @@ protected override async UniTask ApplyGeneration(CancellationToken cancellationT
 
 - Add visualization tools for parameter tuning
 
-![Preview](My project/Assets/Ressources/img.png)
+![Preview](procedural/Assets/Ressources/img.png)
