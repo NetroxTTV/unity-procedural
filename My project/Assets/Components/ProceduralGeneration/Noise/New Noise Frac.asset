@@ -12,18 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e357d80cc74a48247904b993c1b7b309, type: 3}
   m_Name: New Noise Frac
   m_EditorClassIdentifier: 
-  _maxSteps: 1000
+  _maxSteps: 10
   playerPrefab: {fileID: 2009863204050124520, guid: ab9f206ea3467544b8344305dcdf59b1, type: 3}
-  maxIterations: 5
-  mountainThreshold: 6
   _noisetype: 0
-  Frequency: 0.048
-  Amplitude: 0.43
-  _fractaltype: 1
-  Octaves: 1.6
+  Frequency: 0.0342
+  Amplitude: 0.78
+  _fractaltype: 0
+  Octaves: 1
   Lacunarity: 1.47
-  Persistance: 1.43
-  Water_Height: -0.17
-  Sand_Height: 0.27
-  Grass_Height: 0.53
-  Rock_Height: 1
+  Persistance: 0.406
+  Water_Height: -0.32
+  Sand_Height: 0.02
+  Grass_Height: 0.6
+  Rock_Height: 0.87

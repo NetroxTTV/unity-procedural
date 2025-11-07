@@ -107,7 +107,7 @@ public class NoiseFrac : ProceduralGenerationMethod
     }
 }
 
-public class FracCells
+public class NoiseCells
 {
     public bool IsWater { get; private set; }
     public bool IsMountain { get; private set; }
@@ -129,7 +129,7 @@ public class GenNoise
     private FastNoiseLite _noise;
     private float _amplitude;
     private System.Random _random;
-    private FracCells[,] _cells;
+    private NoiseCells[,] _cells;
 
     public GenNoise(VTools.Grid.Grid grid, FastNoiseLite noise, float amplitude, System.Random random)
     {
@@ -137,13 +137,13 @@ public class GenNoise
         _noise = noise;
         _amplitude = amplitude;
         _random = random;
-        _cells = new FracCells[grid.Width, grid.Lenght];
+        _cells = new NoiseCells[grid.Width, grid.Lenght];
 
         for (int x = 0; x < grid.Width; x++)
         {
             for (int y = 0; y < grid.Lenght; y++)
             {
-                _cells[x, y] = new FracCells();
+                _cells[x, y] = new NoiseCells();
             }
         }
     }
@@ -154,5 +154,5 @@ public class GenNoise
         _cells[x, y].SetNoiseValue(noiseValue);
     }
 
-    public FracCells GetCell(int x, int y) => _cells[x, y];
+    public NoiseCells GetCell(int x, int y) => _cells[x, y];
 }
