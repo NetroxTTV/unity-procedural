@@ -161,27 +161,6 @@ protected override async UniTask ApplyGeneration(CancellationToken cancellationT
 
 4. The generation will run automatically when triggered
 
-## Comparison
-
-| Method | Speed | Organic Look | Control | Best For |
-|--------|-------|--------------|---------|----------|
-| Noise Fractal | Fast | Very High | High | Open worlds |
-| BSP | Very Fast | Low | Very High | Dungeons |
-| Cellular Automata | Medium | Very High | Medium | Caves |
-
-## Future Improvements
-
-- Combine multiple methods for hybrid generation
-- Add seed-based reproducibility for testing
-- Implement flood-fill to remove isolated areas
-- Add doorway placement for BSP rooms
-- Export and import generation settings
 - Add visualization tools for parameter tuning
 
-## License
-
-This project is available for educational and personal use.
-
----
-
-Student project - Game Development
+![Preview](My project/Assets/Ressources/img.png)
