@@ -1,3 +1,7 @@
+
+<center>![Preview](procedural/Assets/Ressources/img.png)</center>
+
+
 # Procedural Generation Methods for Unity
 
 This project implements three procedural generation algorithms in Unity using C#. Each method generates different types of terrain and environments suitable for game development.
@@ -162,5 +166,3 @@ protected override async UniTask ApplyGeneration(CancellationToken cancellationT
 4. The generation will run automatically when triggered
 
 - Add visualization tools for parameter tuning
-
-![Preview](procedural/Assets/Ressources/img.png)
