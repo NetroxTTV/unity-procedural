@@ -13,20 +13,25 @@ This repository contains three procedural generation approaches:
 ## Common Features
 
 - Built on Unity's ScriptableObject architecture
-- Asynchronous generation using UniTask
+- Generation using UniTask
 - Grid-based system
-- Configurable parameters through the Unity Inspector
+- Configurable parameters through the Unity Inspector (depending on the procedural generation)
 
 ## 1. Noise Fractal Generation (`NoiseFrac.cs`)
 
-Generates terrain using FastNoiseLite with fractal noise patterns. This method creates realistic landscapes with different biomes based on height values.
+Generates terrain using FastNoiseLite with fractal noise patterns. This method creates realistic landscapes with different biomes based on height values. 
+Everything is modifyable through `ProceduralGridGenerator`. 
+
+<center>
+    <img src="procedural/Assets/Ressources/settings.png">
+</center>
 
 ### Features
 - Multiple biome types: Water, Sand, Grass, Mountains
 - Configurable noise parameters (frequency, amplitude)
 - Fractal settings (octaves, lacunarity, persistence)
 - Adjustable height thresholds for each biome
-- Automatic player spawn point
+- Automatic player spawn point (The Player is Still in wop)
 
 ### Parameters
 ```csharp
@@ -60,6 +65,10 @@ Generates terrain using FastNoiseLite with fractal noise patterns. This method c
 ## 2. Binary Space Partitioning (`BSP.cs`)
 
 Creates interconnected rooms and corridors by recursively dividing the grid space.
+
+<center>
+    <img src="procedural/Assets/Ressources/bsp.png">
+</center>
 
 ### Features
 - Recursive room subdivision
@@ -116,15 +125,6 @@ Simulates organic cave formation using cellular automaton rules over multiple it
 - Cave systems
 - Organic terrain features
 - Natural water bodies
-
-## Technical Details
-
-### Dependencies
-- **Unity** (2020.3+)
-- **UniTask** - For async operations
-- **FastNoiseLite** - Noise generation library
-- **VTools.Grid** - Custom grid system
-- **VTools.ScriptableObjectDatabase** - Template management
 
 ### Architecture
 
