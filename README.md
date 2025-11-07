@@ -1,7 +1,3 @@
-
-<center>![Preview](procedural/Assets/Ressources/img.png)</center>
-
-
 # Procedural Generation Methods for Unity
 
 This project implements three procedural generation algorithms in Unity using C#. Each method generates different types of terrain and environments suitable for game development.
@@ -56,6 +52,10 @@ Generates terrain using FastNoiseLite with fractal noise patterns. This method c
 - Open-world terrain generation
 - Island generation
 - Heightmap-based landscapes
+
+<center>
+    <img src="procedural/Assets/Ressources/img.png">
+</center>
 
 ## 2. Binary Space Partitioning (`BSP.cs`)
 
