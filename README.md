@@ -96,6 +96,10 @@ Creates interconnected rooms and corridors by recursively dividing the grid spac
 
 ## 3. Cellular Automata (`CellularAutomata.cs`)
 
+<center>
+    <img src="procedural/Assets/Ressources/cell">
+</center>
+
 Simulates organic cave formation using cellular automaton rules over multiple iterations.
 
 ### Features
