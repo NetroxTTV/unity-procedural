@@ -115,9 +115,9 @@ Simulates organic cave formation using cellular automaton rules over multiple it
 ### Algorithm Steps
 1. Initialize grid with random noise
 2. Apply cellular automaton rules:
-   - >4 water neighbors → becomes water
-   - <4 water neighbors → becomes ground
-   - =4 neighbors → maintains current state
+   - more than 4 water neighbors → becomes water
+   - less than 4 water neighbors → becomes ground
+   - 4 neighbors → maintains current state
 3. Generate mountains in densely-packed ground areas
 4. Visualize each iteration with delay
 
